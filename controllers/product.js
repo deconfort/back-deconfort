@@ -18,6 +18,8 @@ const controller = {
   },
   read: async (req, res) => {
     let query = {};
+    let order = {};
+
     if (req.query.userId) {
       query = { userId: req.query.userId };
     }
@@ -29,11 +31,21 @@ const controller = {
         ...query,
         name: { $regex: req.query.name, $options: "i" },
       };
-      
     }
-    
+    if (req.query.order) {
+      order = {
+        name: req.query.order,
+      };
+    }
+    if (req.query.order) {
+      order = {
+        date: req.query.order,
+      };
+    }
+
+
     try {
-      let all_products = await Product.find(query)
+      let all_products = await Product.find(query).sort(order);
       if (all_products) {
         res.status(200).json({
           success: true,
@@ -127,6 +139,5 @@ const controller = {
       });
     }
   },
- 
 };
 module.exports = controller;
