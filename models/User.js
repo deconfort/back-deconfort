@@ -1,19 +1,19 @@
 const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema({
-    nombre: {type: String,required: true},
-    apellido: {type: String,required: true},
-    rol: {type: String,  required: true },
-    foto:{type: String, required:true},
-    edad: {type: Number,required: true},
+    name: {type: String,required: true},
+    lastName: {type: String,required: true},
+    role: {type: String,  required: true },
+    photo:{type: String, required:true},
+    age: {type: Number,required: true},
     mail: {type: String,required: true},
-    contraseña: {type: String,required: true},
+    password: {type: String,required: true},
     // confirmPassword: {type: String,required: true},
-    codigo: {type: String,required: true},
-    verificado: {type: Boolean},
-    logueado: {type: Boolean}
+    code: {type: String,required: true},
+    verified: {type: Boolean},
+    logged: {type: Boolean}
 });
 
 
-const Usuario = mongoose.model('usuarios', schema);
-module.exports = Usuario;
+const User = mongoose.model('users', schema);
+module.exports = User;
