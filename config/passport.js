@@ -11,7 +11,6 @@ passport.use(
             secretOrKey: KEY_JWT //con la clave secreta
         }, //la estrategia devuelve la extraccion en un objeto: jwt_payload
         async (jwt_payload,done) => {
-            console.log(jwt_payload)
             try {
                 let user = await User.findOne({ _id :jwt_payload.id }) //buscamos el usuario
                 if (user) {

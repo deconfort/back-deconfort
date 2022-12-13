@@ -6,6 +6,7 @@ const schema = new mongoose.Schema({
      comment: { type: String, required: true, required:true },
      date: {type: Date, required:true},
      photo: {type: String},
+     reports: [{ type: mongoose.Types.ObjectId, ref: "users"}],
 })
 
 
