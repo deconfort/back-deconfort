@@ -10,6 +10,7 @@ const schema = new mongoose.Schema({
     date: { type: Date, required: true },
     stock: { type: Number, required: true },
     price: { type: Number, required: true },
+    inCart: { type: Boolean, default: false },
     userId: { type: mongoose.Types.ObjectId, ref: "users", required: true },
 });
 
