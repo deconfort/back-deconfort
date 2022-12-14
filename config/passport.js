@@ -20,8 +20,8 @@ passport.use(
                         name: user.name,
                         mail: user.mail,
                         role: user.role, 
-                        photo: user.photo
-                        
+                        photo: user.photo,
+                        country: user.country
                     }
                     return done(null, user)
                 } else {
