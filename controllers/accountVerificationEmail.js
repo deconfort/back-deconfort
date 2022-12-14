@@ -199,7 +199,7 @@ function getEmailBody({mail, host, code}) {
           <!-- start copy -->
           <tr>
             <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; border-bottom: 3px solid #d4dadf">
-              <p style="margin: 0;">MyTinerary</p>
+              <p style="margin: 0;">Deconfort.</p>
             </td>
           </tr>
           <!-- end copy -->

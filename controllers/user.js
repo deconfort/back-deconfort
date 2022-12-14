@@ -13,7 +13,7 @@ const jwt = require("jsonwebtoken");
 
 const controller = {
   register: async (req, res, next) => {
-    let { name, lastName, role, photo, age, mail, password } = req.body;
+    let { name, lastName, role, photo, age, mail, password, country } = req.body;
     let verified = false;
     let logged = false;
     let code = crypto.randomBytes(10).toString("hex");
@@ -33,6 +33,7 @@ const controller = {
         verified,
         logged,
         code,
+        country
       });
       //envía mail de verificación (con transportador)
       await accountVerificationEmail(mail, code);
