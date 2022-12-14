@@ -38,6 +38,16 @@ const schema = joi.object({
             'number.base': 'The age is required',
             'number.min': 'You must to be older than 18 years old',
         }),
+        country: joi.string()
+        .required()
+        .min(3)
+        .max(50)
+        .messages({
+            'any.required': 'country Required',
+            'string.empty': 'country Required',
+            'string.min': 'The country is too short',
+            'string.max': 'The country is too large',
+        }),
     mail: joi.string()
         .required()
         .email({minDomainSegments: 2})
