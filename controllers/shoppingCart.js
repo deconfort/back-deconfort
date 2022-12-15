@@ -27,6 +27,7 @@ const controller = {
                 newProductInCart.save();
                 res.json({
                     message: `The product was added to the cart`,
+                    success:true,
                     product,
                 });
            
@@ -35,6 +36,7 @@ const controller = {
         } else if (isInTheCart) {
           res.status(400).json({
             message: `The product is already in the cart`,
+            success:false
           });
         }
       },
