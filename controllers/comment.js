@@ -4,14 +4,14 @@ const User = require("../models/User");
 const controller = {
 	create: async (req, res) => {
 		let id = req.body.userId;
-		let { comment, userId, date } = req.body;
+		let { comment, userId, date, photo } = req.body;
 
 		try {
 			let user = await User.findOne({ _id: id });
 			userId = user._id;
 
 			let comments = await (
-				await Comment.create({ comment, userId, date })
+				await Comment.create({ comment, userId, date, photo })
 			).populate("userId", {
 				photo: 1,
 				name: 1,

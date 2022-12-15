@@ -5,7 +5,7 @@ const schema = new mongoose.Schema({
      ref: 'users', required:true},
      comment: { type: String, required: true, required:true },
      date: {type: Date, required:true},
-     photo: {type: String},
+     photo: {type: String, required:true},
      reports: [{ type: mongoose.Types.ObjectId, ref: "users"}],
 })
 

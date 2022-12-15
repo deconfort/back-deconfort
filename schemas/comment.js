@@ -7,7 +7,7 @@ const schema = joi.object({
     "string.min": "Name: min 3 characters",
   }),
   date: joi.date().required(),
-  photo: joi.string(),
+  photo: joi.string().required(),
   reports: joi.any()
 
 });
