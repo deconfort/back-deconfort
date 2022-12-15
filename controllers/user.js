@@ -61,7 +61,7 @@ const controller = {
         //si tiene éxito debe redirigir a alguna página (home, welcome, login)
         //con el metodo redirect, redirijo automaticamente al usuario (en el front)
         //hacia la pagina que quiero que se "mueva"
-        return res.redirect("http://localhost:3000/index");
+        return res.redirect("http://localhost:3000/login");
       } //si no tiene éxito debe responder con el error
       return userNotFoundResponse(req, res);
     } catch (error) {
