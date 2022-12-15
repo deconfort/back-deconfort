@@ -37,12 +37,6 @@ const controller = {
         name: req.query.order,
       };
     }
-    if (req.query.order) {
-      order = {
-        date: req.query.order,
-      };
-    }
-
 
     try {
       let all_products = await Product.find(query).sort(order);
@@ -100,6 +94,7 @@ const controller = {
       if (product) {
         res.status(200).json({
           id: product._id,
+          response: product,
           success: true,
           message: "The product was successfully modified",
         });
