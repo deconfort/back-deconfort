@@ -16,7 +16,7 @@ const schema = new mongoose.Schema({
     user: {
         type: mongoose.Types.ObjectId,
         ref: "users",
-        required: true
+        
     },
     productName: {
         type: Array,
@@ -38,7 +38,7 @@ const schema = new mongoose.Schema({
         min: 2,
         max: 100
     },
-    shippingadress: {
+    adress: {
         type: String,
         required: true,
         min: 2,

@@ -1,35 +1,37 @@
-const nodemailer = require("nodemailer");
-const { google } = require("googleapis");
-const OAuth2 = google.auth.OAuth2;
-const { GOOGLE_ID, GOOGLE_SECRET, GOOGLE_REFRESH, GOOGLE_URL, GOOGLE_USER } =
-  process.env;
+const { createTransport } = require('nodemailer')
+const { google } = require('googleapis')
+const OAuth2 = google.auth.OAuth2
+const { GOOGLE_ID,GOOGLE_REFRESH,GOOGLE_SECRET,GOOGLE_URL,GOOGLE_USER,BACK_URL } = process.env
 
-const controller = async (mail, name, lastname, country, state, phone, shippingadress, productName, productPrice, code) => {
-  const client = new OAuth2(GOOGLE_ID, GOOGLE_SECRET, GOOGLE_URL);
-  client.setCredentials({
-    refresh_token: GOOGLE_REFRESH,
-  });
-  const accessToken = client.getAccessToken();
-  const transport = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: GOOGLE_USER,
-      type: "OAuth2",
-      clientId: GOOGLE_ID,
-      clientSecret: GOOGLE_SECRET,
-      refreshToken: GOOGLE_REFRESH,
-      accessToken: accessToken,
-    },
-    tls: {
-      rejectUnauthorized: false,
-    },
-  });
-  const mailOptions = {
-    from: GOOGLE_USER,
-    to: mail,
-    subject: "Your ",
-    html: 
-    `
+function createClient() {
+    return new OAuth2( 
+        GOOGLE_ID,
+        GOOGLE_SECRET,
+        GOOGLE_URL
+    )
+}
+
+function getTransport(client) {
+ 
+  const accessToken = client.getAccessToken()
+  return createTransport({
+      service: 'gmail',   
+      auth: {            
+          user: GOOGLE_USER,
+          type: 'OAuth2',
+          clientId: GOOGLE_ID,
+          clientSecret: GOOGLE_SECRET,
+          refreshToken: GOOGLE_REFRESH,
+          accessToken: accessToken
+      },
+      tls: { rejectUnauthorized: false }
+   
+  })
+}
+
+
+  function sendEmail({mail, name, lastName, country, state, phone, adress, productName, productPrice, }){
+    return `
     <html>
     <head>
       <meta charset="utf-8">
@@ -143,17 +145,15 @@ const controller = async (mail, name, lastname, country, state, phone, shippinga
             <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
               <tr>
                 <td align="left" bgcolor="#ffffff" style="padding: 36px 24px 0; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; border-top: 3px solid #d4dadf;">
-                  <h1 style="margin: 0; font-size: 32px; font-weight: 700; letter-spacing: -1px; line-height: 48px;">Hi ${mail}, this is yor purchase detail</h1>
+                  <h1 style="margin: 0; font-size: 32px; font-weight: 700; letter-spacing: -1px; line-height: 48px;">Hi ${mail}, these are the details of your purchase</h1>
                   <p style="margin: 0; font-size: 12px; font-weight: 100; letter-spacing: -1px; line-height: 48px;">Products: ${productName}</p>
                   <p style="margin: 0; font-size: 12px; font-weight: 100; letter-spacing: -1px; line-height: 48px;">Price: $${productPrice}</p>
-                  <h3 style="margin: 0; font-size: 12px; font-weight: 100; letter-spacing: -1px; line-height: 48px;">Buyer details</h3>
                   <p style="margin: 0; font-size: 12px; font-weight: 100; letter-spacing: -1px; line-height: 48px;">Country: ${country}</p>
                   <p style="margin: 0; font-size: 12px; font-weight: 100; letter-spacing: -1px; line-height: 48px;">State: ${state}</p>
                   <p style="margin: 0; font-size: 12px; font-weight: 100; letter-spacing: -1px; line-height: 48px;">Name: ${name}</p>
-                  <p style="margin: 0; font-size: 12px; font-weight: 100; letter-spacing: -1px; line-height: 48px;">Lastname: ${lastname}</p>
-                  <p style="margin: 0; font-size: 12px; font-weight: 100; letter-spacing: -1px; line-height: 48px;">Shipping adress: ${phone}</p>
-                  <p style="margin: 0; font-size: 12px; font-weight: 100; letter-spacing: -1px; line-height: 48px;">Purchase code: ${code}</p>
-                  <p style="margin: 0; font-size: 12px; font-weight: 100; letter-spacing: -1px; line-height: 48px;">Phone: ${shippingadress}</p>
+                  <p style="margin: 0; font-size: 12px; font-weight: 100; letter-spacing: -1px; line-height: 48px;">Lastname: ${lastName}</p>
+                  <p style="margin: 0; font-size: 12px; font-weight: 100; letter-spacing: -1px; line-height: 48px;">Shipping adress: ${adress}</p>
+                  <p style="margin: 0; font-size: 12px; font-weight: 100; letter-spacing: -1px; line-height: 48px;">Phone: ${phone}</p>
                 </td>
               </tr>
             </table>
@@ -175,14 +175,6 @@ const controller = async (mail, name, lastname, country, state, phone, shippinga
             <td align="center" valign="top" width="600">
             <![endif]-->
             <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
-    
-              <!-- start copy -->
-              <tr>
-                <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
-                  <p style="margin: 0;">Tap the button below to confirm your email address. If you didn't create an account with Deconfort, you can safely delete this email.</p>
-                </td>
-              </tr>
-              <!-- end copy -->
               <!-- start copy -->
               <tr>
                 <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; border-bottom: 3px solid #d4dadf">
@@ -224,14 +216,31 @@ const controller = async (mail, name, lastname, country, state, phone, shippinga
     </body>
     </html>
     `
-  };
-  await transport.sendMail(mailOptions, (error, response) => {
-    if (error) {
-      console.log(error);
-    } else {
-        console.log('Email sent!')
+  }
+    
+  const sendEmailPurchase = async (mail, lastName, price, country, state, adress, phone, productName, productPrice, name) => {
+    const client = createClient()
+    client.setCredentials({ refresh_token: process.env.GOOGLE_REFRESH })
+    const transport = getTransport(client)
+    const mailOptions = {
+        from: GOOGLE_USER, 
+        to: mail, 
+        subject: 'Your purchase', 
+        html: sendEmail({ mail:mail, lastName:lastName, price:price, state:state, adress:adress, phone:phone, productName:productName, productPrice:productPrice, country:country, name:name, host:BACK_URL }) 
     }
-  });
-};
+  
+    await transport.sendMail(
+        mailOptions, 
+        (error, response) => { 
+            if (error) {
+                console.error(error)
+                return
+            }
+            console.log('Email sent!')
+        }
+    )
+}
 
-module.exports = controller;
+
+
+module.exports = sendEmailPurchase;
