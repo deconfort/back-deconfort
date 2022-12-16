@@ -15,7 +15,7 @@ const schema = joi.object({
     }),
 
     color: joi.string().messages,
-    photo: joi.array().items(joi.string().required().uri().messages({
+    photo: joi.string().items(joi.string().required().uri().messages({
         "any.required": "Complete this input, please",
         "string.empty": "Complete the URL photo, please",
         "string.uri": "The field 'photo' must be an url"

@@ -146,13 +146,12 @@ function getTransport(client) {
               <tr>
                 <td align="left" bgcolor="#ffffff" style="padding: 36px 24px 0; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; border-top: 3px solid #d4dadf;">
                   <h1 style="margin: 0; font-size: 32px; font-weight: 700; letter-spacing: -1px; line-height: 48px;">Hi ${mail}, these are the details of your purchase</h1>
+                  <p style="margin: 0; font-size: 12px; font-weight: 100; letter-spacing: -1px; line-height: 48px;">Name: ${name}${lastName}</p>
                   <p style="margin: 0; font-size: 12px; font-weight: 100; letter-spacing: -1px; line-height: 48px;">Products: ${productName}</p>
-                  <p style="margin: 0; font-size: 12px; font-weight: 100; letter-spacing: -1px; line-height: 48px;">Price: $${productPrice}</p>
+                  <p style="margin: 0; font-size: 12px; font-weight: 100; letter-spacing: -1px; line-height: 48px;">Total price: $${productPrice}</p>
                   <p style="margin: 0; font-size: 12px; font-weight: 100; letter-spacing: -1px; line-height: 48px;">Country: ${country}</p>
                   <p style="margin: 0; font-size: 12px; font-weight: 100; letter-spacing: -1px; line-height: 48px;">State: ${state}</p>
-                  <p style="margin: 0; font-size: 12px; font-weight: 100; letter-spacing: -1px; line-height: 48px;">Name: ${name}</p>
-                  <p style="margin: 0; font-size: 12px; font-weight: 100; letter-spacing: -1px; line-height: 48px;">Lastname: ${lastName}</p>
-                  <p style="margin: 0; font-size: 12px; font-weight: 100; letter-spacing: -1px; line-height: 48px;">Shipping adress: ${adress}</p>
+                  <p style="margin: 0; font-size: 12px; font-weight: 100; letter-spacing: -1px; line-height: 48px;">Adress: ${adress}</p>
                   <p style="margin: 0; font-size: 12px; font-weight: 100; letter-spacing: -1px; line-height: 48px;">Phone: ${phone}</p>
                 </td>
               </tr>
