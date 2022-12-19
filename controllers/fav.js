@@ -28,7 +28,7 @@ const controller = {
         try {
             let favs = await Fav.find(query)
                 .populate({ path: 'userId', select: 'name lastName photo' })
-                .populate({ path: 'productId', select: 'name photo price _id' })
+                .populate({ path: 'productId', select: 'name photo price category _id' })
 
             if (favs.length > 0) {
                 let lengthOfFavs = {}
