@@ -6,7 +6,7 @@ const controller = {
         const { name, photo, price, userId, productId } = req.body;
         const isInProducts = await Product.findOne({ name });
         const notEmpty = name !== "" && photo !== "" && price !== "" && userId !== "" && productId !== "";
-        const isInTheCart = await ShoppingCart.findOne({ name });
+        const isInTheCart = await ShoppingCart.findOne({ name, userId });
     
         if (!isInProducts) {
           res.status(400).json({

@@ -40,7 +40,7 @@ const controller = {
 
 		try {
 			comments = await Comment.find(query)
-				.sort({ date: "asc" })
+				.sort({ date: -1 })
 				.populate("userId", {
 					photo: 1,
 					name: 1,
