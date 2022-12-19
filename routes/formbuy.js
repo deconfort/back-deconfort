@@ -1,9 +1,9 @@
 var express = require("express");
 var router = express.Router();
 
-const { readAll, create } = require("../controllers/formbuy");
+const { readAll, sendmail } = require("../controllers/formbuy");
 
 router.get("/", readAll);
-router.post("/", create);
+router.post("/", sendmail);
 
 module.exports = router;
