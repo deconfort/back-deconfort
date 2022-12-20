@@ -44,14 +44,16 @@ const controller = {
         const { id } = req.params;
 
         let productInCart = await ShoppingCart.findById(id);
-        const { name, photo, price, _id } = await Product.findOne({
+        const { name, photo, price, _id, stock } = await Product.findOne({
           name: productInCart.name,
         });
+
+        let newStock = productInCart.amount + stock
       
         await ShoppingCart.findByIdAndDelete(id);
         await Product.findByIdAndUpdate(
           _id,
-          { inCart: false, name, photo, price },
+          { inCart: false, name, photo, price, stock: newStock },
           { new: true }
         )
           .then((product) => {
