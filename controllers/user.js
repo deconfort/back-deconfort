@@ -95,7 +95,7 @@ const controller = {
           response: {
             user: {
               name: user.name,
-              lastname: user.lastName,
+              lastName: user.lastName,
               photo: user.photo,
               role: user.role,
               id: user.id,
