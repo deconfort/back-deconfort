@@ -5,7 +5,7 @@ const schema = new mongoose.Schema({
     category: { type: String, required: true },
     name: { type: String, required: true },
     color: { type: String },
-    photo: { type: String, required: true },
+    photo: [{ type: String, required: true }],
     description: { type: String, required: true },
     date: { type: Date, required: true },
     stock: { type: Number, required: true },
