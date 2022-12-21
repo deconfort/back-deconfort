@@ -118,6 +118,23 @@ const controller = {
             })
         }
     },
+
+    destroyFav: async (req, res) => {
+        let { id } = req.params
+        try {
+            let response = await Fav.findOneAndDelete({ _id: id })
+            res.status(200).json({
+                response,
+                message: `fav deleted`,
+                success: true,
+            })
+        } catch (error) {
+            res.status(400).json({
+                message: error.message,
+                success: false
+            })
+        }
+    },
 }
 
 module.exports = controller;    
