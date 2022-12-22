@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 
 const schema = new mongoose.Schema({
+    mail: { type: String, required: true },
     name: {
         type: String,
         required: true,
@@ -12,19 +13,6 @@ const schema = new mongoose.Schema({
         required: true,
         min: 4,
         max: 100
-    },
-    user: {
-        type: mongoose.Types.ObjectId,
-        ref: "users",
-        
-    },
-    productName: {
-        type: Array,
-        required: true,
-    },
-    productPrice: {
-        type: Number,
-        required: true,
     },
     country: {
         type: String,
@@ -44,13 +32,20 @@ const schema = new mongoose.Schema({
         min: 2,
         max: 100
     },
-    mail: { type: String, required: true },
     phone: {
         type: String,
         required: true,
         min: 6,
         max: 20
     },
+    productName: {
+        type: Array,
+        required: true,
+    },
+    productPrice: {
+        type: Number,
+        required: true,
+    }
 })
 
 const FormBuy = mongoose.model(

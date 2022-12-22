@@ -13,8 +13,7 @@ const controller = {
       adress,
       phone,
       productName,
-      productPrice,
-      
+      productPrice
     } = req.body;
  
     try {
@@ -31,7 +30,7 @@ const controller = {
     
       });
       console.log(productName);
-      await sendmail(mail,  name, lastName, country, state,phone, productName, productPrice, adress);
+      await sendmail(mail,  name, lastName, country, state, adress, phone, productName, productPrice);
      return res.status(201).json({
         message: "purchase created",
         success: true,
