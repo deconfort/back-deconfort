@@ -51,7 +51,7 @@ function sendEmail({
     <p>Adress: ${adress}</p>
     <p>Phone: ${phone}</p>
     <p>Product Name: ${productName}</p>
-    <p>Product Price: ${productPrice}</p>
+    <p>Product Price: $${productPrice}</p>
     <h3>Thanks for your purchase!. </h3>  
 </div>
 `;
